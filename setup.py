@@ -60,7 +60,8 @@ setup(
         ),
     },
     install_requires=[
-        "numpy>=1.21.0",
+        "setuptools>=51.0.0",
+        "numpy>=1.24.0",
         "Orange3>=3.37.0",
         "aif360>=0.6.0",
     ],

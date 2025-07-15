@@ -2,6 +2,7 @@
 This module contains the OWAdversarialDebiasing widget.
 """
 
+import sys
 from itertools import chain
 
 from Orange.widgets import gui
@@ -224,7 +225,9 @@ class OWAdversarialDebiasing(ConcurrentWidgetMixin, OWBaseLearner):
             "The Adversarial Debiasing widget requires TensorFlow, which is not installed.\n"
             'You can install it by clicking the "Install TensorFlow" button below, selecting \n'
             'the checkbox next to the "tensorflow" text and clicking the "Ok" button.\n'
-            "After that, you will need to restart Orange."
+            'After that, you will need to restart Orange.\n'
+            '\n'
+            'On Windows, this will install TensorFlow with CPU support only.'
         )
         label.setWordWrap(True)
         layout.addWidget(label)
@@ -243,10 +246,10 @@ class OWAdversarialDebiasing(ConcurrentWidgetMixin, OWBaseLearner):
         """
 
         installable = Installable(
-            name="tensorflow",
-            version="2.17.0",
+            name="tensorflow-cpu" if sys.platform == "win32" else "tensorflow",
+            version="2.18.0",  # 2.18.0 works on Github actions and is available on conda on 20250714
             summary="TensorFlow is an open source machine learning framework for everyone.",
-            description="[![Python](https://img.shields.io/pypi/pyversions/tensorflow.svg?style=plastic)](https://badge.fury.io/py/tensorflow)\n[![PyPI](https://badge.fury.io/py/tensorflow.svg)](https://badge.fury.io/py/tensorflow)\n\nTensorFlow is an open source software library for high performance numerical\ncomputation. Its flexible architecture allows easy deployment of computation\nacross a variety of platforms (CPUs, GPUs, TPUs), and from desktops to clusters\nof servers to mobile and edge devices.\n\nOriginally developed by researchers and engineers from the Google Brain team\nwithin Google's AI organization, it comes with strong support for machine\nlearning and deep learning and the flexible numerical computation core is used\nacross many other scientific domains. TensorFlow is licensed under [Apache\n2.0](https://github.com/tensorflow/tensorflow/blob/master/LICENSE).\n",
+            description="TensorFlow is an open source software library for high performance numerical\ncomputation. Its flexible architecture allows easy deployment of computation\nacross a variety of platforms (CPUs, GPUs, TPUs), and from desktops to clusters\nof servers to mobile and edge devices.\n\nOriginally developed by researchers and engineers from the Google Brain team\nwithin Google's AI organization, it comes with strong support for machine\nlearning and deep learning and the flexible numerical computation core is used\nacross many other scientific domains. TensorFlow is licensed under [Apache\n2.0](https://github.com/tensorflow/tensorflow/blob/master/LICENSE).\n",
             package_url="https://pypi.org/project/tensorflow/",
             release_urls=[],
             requirements=[],
