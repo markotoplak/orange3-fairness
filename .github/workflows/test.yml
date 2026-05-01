@@ -11,4 +11,4 @@ on:
 
 jobs:
   test:
-    uses: biolab/orange-ci-cd/.github/workflows/test-addons.yml@master
+    uses: biolab/orange-ci-cd/.github/workflows/test-addons.yml@vcred
